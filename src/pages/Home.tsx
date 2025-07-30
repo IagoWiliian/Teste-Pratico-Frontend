@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ResultadoPetshop from "../components/ResultadoPetshop";
 import api from "../services/Service";
 
 interface Resultado {
@@ -13,49 +12,99 @@ const Home: React.FC = () => {
   const [caesGrandes, setCaesGrandes] = useState(0);
   const [resultado, setResultado] = useState<Resultado | null>(null);
 
-  const buscarMelhorPetshop = async () => {
-    try {
-      const response = await api.post("/melhor-petshop", {
-        data,
-        caesPequenos,
-        caesGrandes,
-      });
-      setResultado(response.data as Resultado);
-    } catch (error) {
-      alert("Erro ao buscar o melhor petshop.");
-    }
-  };
+const formatDate = (dateStr: string) => {
+  const [year, month, day] = dateStr.split("-");
+  return `${day}/${month}/${year}`;
+};
+
+const buscarMelhorPetshop = async () => {
+  try {
+    const response = await api.post("/melhor-petshop", {
+      data: formatDate(data), 
+      caesPequenos,
+      caesGrandes,
+    });
+    setResultado(response.data as Resultado);
+  } catch (error) {
+    alert("Erro ao buscar o melhor petshop.");
+  }
+};
 
   return (
-    <div className="container">
-      <h1>Buscar Melhor Petshop</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl">
+      
+        <div className="flex-1 flex flex-col justify-center items-start md:items-start text-left">
+          <h2 className="text-4xl font-extrabold text-blue-700 mb-4">Seu pet merece o melhor!</h2>
+          <p className="text-lg text-gray-700 mb-6">
+            Use nossa aplicação para comparar preços e encontrar o petshop ideal para seu melhor amigo. Praticidade, economia e carinho em um só lugar!
+          </p>
+        </div>
 
-      <label>Data:</label>
-      <input
-        type="date"
-        value={data}
-        onChange={(e) => setData(e.target.value)}
-      />
+        
+        <div className="flex-1 flex flex-col items-center">
+          <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <h1 className="text-2xl font-bold mb-6 text-center text-blue-600">Buscar Melhor Petshop</h1>
 
-      <label>Cães Pequenos:</label>
-      <input
-        type="number"
-        value={caesPequenos}
-        onChange={(e) => setCaesPequenos(parseInt(e.target.value))}
-      />
+            <label className="block mb-2 text-sm font-medium text-gray-700">Data:</label>
+            <input
+              type="date"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+              className="mb-4 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
 
-      <label>Cães Grandes:</label>
-      <input
-        type="number"
-        value={caesGrandes}
-        onChange={(e) => setCaesGrandes(parseInt(e.target.value))}
-      />
+            <label className="block mb-2 text-sm font-medium text-gray-700">Cães Pequenos:</label>
+            <input
+              type="number"
+              value={caesPequenos}
+              min={0}
+              onChange={(e) => setCaesPequenos(Number(e.target.value))}
+              className="mb-4 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
 
-      <button onClick={buscarMelhorPetshop}>Buscar</button>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Cães Grandes:</label>
+            <input
+              type="number"
+              value={caesGrandes}
+              min={0}
+              onChange={(e) => setCaesGrandes(Number(e.target.value))}
+              className="mb-6 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
 
-      {resultado && (
-        <ResultadoPetshop nome={resultado.nome} precoTotal={resultado.precoTotal} />
-      )}
+            <button
+              onClick={buscarMelhorPetshop}
+              disabled={!data || (caesPequenos === 0 && caesGrandes === 0)}
+              className={`w-full py-2 rounded transition ${
+                !data || (caesPequenos === 0 && caesGrandes === 0)
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              Buscar
+            </button>
+          </div>
+
+          {resultado && (
+            <div className="mt-8 w-full max-w-md">
+              <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-xl shadow-lg p-8 flex flex-col items-center border border-green-300">
+                <h2 className="text-2xl font-bold text-green-700 mb-4">Melhor Petshop Encontrado!</h2>
+                <div className="w-full flex flex-col gap-2 mb-4">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-gray-700">Nome:</span>
+                    <span className="text-gray-900">{resultado.nome}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-gray-700">Preço Total:</span>
+                    <span className="text-green-700 font-bold">R$ {resultado.precoTotal.toFixed(2)}</span>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 text-center">Confira as condições e horários antes de agendar. Seu pet merece o melhor!</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
