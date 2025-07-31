@@ -21,7 +21,7 @@ const ResultadoPetshop: React.FC<ResultadoPetshopProps> = ({ nome, precoTotal })
         </div>
       </div>
       <p className="text-sm text-gray-600 text-center">
-        Confira as condições e horários antes de agendar. Seu pet merece o melhor!
+        Confira as condições e hórarios antes de agendar!
       </p>
     </div>
   );

@@ -1,8 +1,16 @@
-import React from "react";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
 
+
 function App() {
-  return <Home />;
+  return (
+    <>
+      <Navbar />
+      <Home />
+      <Footer />
+    </>
+  );
 }
 
-export default App;
+export default App
