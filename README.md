@@ -1,6 +1,6 @@
-🐾 Petshop  — Frontend
-Aplicação desenvolvida em React  com consumo de uma API em Spring Boot para comparar preços entre diferentes petshops e encontrar a melhor opção para o cliente.
+🐾 Busque o Melhor Petshop — Frontend
 
+Aplicação desenvolvida em React com consumo de uma API em Spring Boot, para comparar preços entre diferentes petshops e encontrar a melhor opção para o cliente.
 
 🚀 Tecnologias utilizadas
 React
@@ -11,42 +11,44 @@ Axios
 
 TypeScript
 
-CSS
+Tailwind CSS
 
 📦 Instalação e execução
 Clone o repositório:
 
-bash
-Copiar
-Editar
 git clone git@github.com:IagoWiliian/Teste-Pratico-Frontend.git
+
 Acesse a pasta do projeto:
 
-bash
-Copiar
-Editar
 cd petshop
+
 Instale as dependências:
 
-bash
-Copiar
-Editar
 npm install
+ ou
+yarn
+
 Execute a aplicação:
 
-bash
-Copiar
-Editar
-npm run dev/ yarn dev
+npm run dev
+ ou
+yarn dev
+
 📋 Funcionalidades
+
 Escolha a data do banho
 
-Informe a quantidade de cães pequenos e grandes
+Informe a quantidade de cães pequenos e cães grandes
 
 Clique em "Buscar" para receber a melhor opção de petshop com base no preço total
 
-Visualização simples e intuitiva do resultado
+Interface moderna, responsiva e estilizada com Tailwind CSS
+
+Resultado exibido de forma clara e objetiva
 
 🔗 Integração com API
-A aplicação consome os dados de uma API desenvolvida em Spring Boot (backend separado). Certifique-se de que o backend esteja rodando antes de fazer as requisições.
+A aplicação consome os dados de uma API em Spring Boot (backend separado).
+Certifique-se de que o backend esteja em execução antes de realizar as requisições.
 
+📁 Repositório do Backend:
+git clone git@github.com:IagoWiliian/Teste-Pratico.git
