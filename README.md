@@ -19,7 +19,7 @@ Clone o repositório:
 bash
 Copiar
 Editar
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone git@github.com:IagoWiliian/Teste-Pratico-Frontend.git
 Acesse a pasta do projeto:
 
 bash
